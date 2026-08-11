@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useRef, useState } from "react";
 import { Flower } from "@/components/Flower";
-import songAsset from "@/assets/dorothea.mp3.asset.json";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -99,7 +98,7 @@ const blooms: Bloom[] = [
   },
   {
     phrase:
-      "Nunca olvides que tienes una amiga que te va a apoyar en la idea más loca, aunque sea la más loca.",
+      "Nunca olvides que tienes una amiga que te va a apoyar en la idea más loca, хотя sea la más loca.",
     color: "var(--petal-8)",
     size: 72,
     petals: 8,
@@ -179,7 +178,8 @@ function Index() {
 
   return (
     <main className="bg-rosado font-body relative min-h-screen overflow-hidden">
-      <audio ref={audioRef} src={songAsset.url} loop preload="auto" />
+      {/* Usamos una ruta absoluta limpia para la carpeta public con un sufijo de versión para evitar caché */}
+      <audio ref={audioRef} src="./dorothea.mp3" loop preload="auto" />
       {opened && <FallingPetals />}
 
       {!opened ? (
