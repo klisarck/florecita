@@ -167,13 +167,14 @@ function Index() {
   const [active, setActive] = useState<number | null>(null);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
-  useEffect(() => {
-    if (!opened) return;
+  const handleOpen = () => {
+    setOpened(true);
     const audio = audioRef.current;
-    if (!audio) return;
-    audio.volume = 0.6;
-    void audio.play().catch(() => {});
-  }, [opened]);
+    if (audio) {
+      audio.volume = 0.6;
+      audio.play().catch((err) => console.log("Error al reproducir audio:", err));
+    }
+  };
 
   return (
     <main className="bg-rosado font-body relative min-h-screen overflow-hidden">
@@ -188,7 +189,7 @@ function Index() {
             presiona el corazón
           </h1>
           <button
-            onClick={() => setOpened(true)}
+            onClick={handleOpen}
             aria-label="Presiona el corazón"
             className="animate-heart-beat cursor-pointer rounded-full transition-transform duration-300 hover:scale-105 focus:outline-none"
           >
