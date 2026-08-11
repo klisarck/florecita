@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useRef, useState } from "react";
 import { Flower } from "@/components/Flower";
-// Importamos el archivo directamente desde src/assets
 import songFile from "@/assets/dorothea.mp3";
 
 export const Route = createFileRoute("/")({
@@ -173,14 +172,13 @@ function Index() {
     setOpened(true);
     const audio = audioRef.current;
     if (audio) {
-      audio.volume = 1.0; // ¡Volumen al 100%!
+      audio.volume = 1.0;
       audio.play().catch((err) => console.log("Error al reproducir audio:", err));
     }
   };
 
   return (
     <main className="bg-rosado font-body relative min-h-screen overflow-hidden">
-      {/* Usamos el archivo importado de assets */}
       <audio ref={audioRef} src={songFile} loop preload="auto" />
       
       {opened && <FallingPetals />}
