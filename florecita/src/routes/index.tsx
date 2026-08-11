@@ -171,19 +171,20 @@ function Index() {
     setOpened(true);
     const audio = audioRef.current;
     if (audio) {
-      audio.volume = 1.0; // ¡Volumen al máximo! (1.0 es el 100%)
+      audio.volume = 1.0;
       audio.play().catch((err) => console.log("Error al reproducir audio:", err));
     }
   };
 
   return (
     <main className="bg-rosado font-body relative min-h-screen overflow-hidden">
-      {/* Obtenemos el audio directamente de la URL cruda (raw) de tu GitHub */}
+      {/* Usamos jsDelivr como CDN para forzar el encabezado de audio correcto */}
       <audio 
         ref={audioRef} 
-        src="https://raw.githubusercontent.com/klisarck/florecita/main/public/dorothea.mp3" 
+        src="https://cdn.jsdelivr.net/gh/klisarck/florecita@main/public/dorothea.mp3" 
         loop 
-        preload="auto" 
+        preload="auto"
+        crossOrigin="anonymous" 
       />
       
       {opened && <FallingPetals />}
@@ -213,7 +214,6 @@ function Index() {
           </p>
 
           <div className="animate-sway relative mt-8 h-[380px] w-full origin-bottom">
-            {/* tallos */}
             <svg
               viewBox="0 0 100 100"
               preserveAspectRatio="none"
@@ -253,7 +253,6 @@ function Index() {
               </button>
             ))}
 
-            {/* envoltura */}
             <svg
               viewBox="0 0 300 120"
               className="absolute bottom-0 left-1/2 h-[28%] w-[62%] -translate-x-1/2"
