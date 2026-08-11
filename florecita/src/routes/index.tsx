@@ -1,8 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useRef, useState } from "react";
 import { Flower } from "@/components/Flower";
-// 👇 IMPORTAMOS EL AUDIO DIRECTAMENTE DESDE ASSETS 👇
-import songFile from "@/assets/dorothea.mp3";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -173,15 +171,21 @@ function Index() {
     setOpened(true);
     const audio = audioRef.current;
     if (audio) {
-      audio.volume = 0.6;
+      audio.volume = 1.0; // ¡Volumen al máximo! (1.0 es el 100%)
       audio.play().catch((err) => console.log("Error al reproducir audio:", err));
     }
   };
 
   return (
     <main className="bg-rosado font-body relative min-h-screen overflow-hidden">
-      {/* 👇 USAMOS LA VARIABLE songFile AQUÍ 👇 */}
-      <audio ref={audioRef} src={songFile} loop preload="auto" />
+      {/* Obtenemos el audio directamente de la URL cruda (raw) de tu GitHub */}
+      <audio 
+        ref={audioRef} 
+        src="https://raw.githubusercontent.com/klisarck/florecita/main/public/dorothea.mp3" 
+        loop 
+        preload="auto" 
+      />
+      
       {opened && <FallingPetals />}
 
       {!opened ? (
