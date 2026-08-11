@@ -1,6 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useRef, useState } from "react";
 import { Flower } from "@/components/Flower";
+// Importamos el archivo directamente desde src/assets
+import songFile from "@/assets/dorothea.mp3";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -171,21 +173,15 @@ function Index() {
     setOpened(true);
     const audio = audioRef.current;
     if (audio) {
-      audio.volume = 1.0;
+      audio.volume = 1.0; // ¡Volumen al 100%!
       audio.play().catch((err) => console.log("Error al reproducir audio:", err));
     }
   };
 
   return (
     <main className="bg-rosado font-body relative min-h-screen overflow-hidden">
-      {/* Usamos jsDelivr como CDN para forzar el encabezado de audio correcto */}
-      <audio 
-        ref={audioRef} 
-        src="https://cdn.jsdelivr.net/gh/klisarck/florecita@main/public/dorothea.mp3" 
-        loop 
-        preload="auto"
-        crossOrigin="anonymous" 
-      />
+      {/* Usamos el archivo importado de assets */}
+      <audio ref={audioRef} src={songFile} loop preload="auto" />
       
       {opened && <FallingPetals />}
 
